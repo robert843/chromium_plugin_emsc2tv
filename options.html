@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  <meta charset="UTF-8">
+  <link href='https://fonts.googleapis.com/css?family=Lato:300,400' rel='stylesheet' type='text/css'>
+
+	<script src="settings.js"></script>
+	<link rel="stylesheet" href="css/options.css" type="text/css">
+</head>
+
+<body>
+<form action="#">
+    
+  <div>
+    <fieldset>
+    
+      <legend class="desc">
+        Powiadomienia
+      </legend>
+      
+      <div>
+      	<div>
+      		<input id="notification_enable" name="notification" type="radio" value="1" tabindex="1">
+      		<label class="choice" for="notification_enable">Włączone</label>
+      	</div>
+        <div>
+        	<input id="notification_disable" name="notification" type="radio" value="0" tabindex="2">
+        	<label class="choice" for="notification_disable">Wyłączone</label>
+        </div>
+        <div>
+          	<input id="notification_sound" name="notification_sound" type="checkbox" value="Dźwiek" tabindex="3">
+          	<label class="choice" for="notification_sound">Dźwiek</label>
+        </div>
+      </div>
+    </fieldset>
+  </div>
+  
+ 
+    <div id="sound_settings">
+    <fieldset>
+      <legend class="desc">
+        Ustawienia dźwieku powiadomień
+      </legend>
+      <div>
+      <div>            
+        <label class="choice" for="volume">Głośność</label>
+      	<input type="range" id="volume" name="volume" 
+           min="10" max="100" value="100" step="1" /><label id="volumeLabel" for="volume"></label>
+
+      </div>
+    <div>            
+        <label class="choice" for="notification_sound_file">Dźwięk powiadomień</label>
+
+	        <input id="notification_sound_default" name="notification_sound_default" type="radio" value="1" tabindex="4">
+      		<label class="choice" for="notification_sound_default">Domyślny</label>
+
+	        <input id="notification_sound_own" name="notification_sound_default" type="radio" value="0" tabindex="5">
+      		<label class="choice" for="notification_sound_own">Własny</label>
+
+      	    <input type="file" id="notification_sound_file" name="notification_sound_file"/>
+
+      </div>
+    </fieldset>
+  </div>
+ <div>
+    <fieldset>
+      <legend class="desc">
+        Częstotliwość odświeżania informacji
+      </legend>
+      <div>
+      <div>
+      	<input type="range" id="refreshRate" name="refreshRate" 
+           min="10" max="300" value="10" step="1" /><label id="refreshRateLabel" for="refreshRate"></label>
+      </div>
+    
+    </fieldset>
+  </div>
+  
+
+
+  <div>
+		<div>
+  		<input id="saveForm" name="saveForm" type="submit" value="Zapisz">
+    </div>
+	</div>
+  
+</form>
+</body>
+
+</html>
+

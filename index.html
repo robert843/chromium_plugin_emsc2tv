@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  <meta charset="UTF-8">
+  <title>Modal Indeterminate Loader</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:300,400' rel='stylesheet' type='text/css'>
+  <script src="https://use.fontawesome.com/dbb72ac4f9.js"></script>
+
+  
+      <style>
+      /* NOTE: The styles were added inline because Prefixfree needs access to your styles and they must be inlined if they are on local disk! */
+body{
+  font-family: 'Lato', sans-serif;
+  font-weight: 300;
+  background: #ccc;
+  color: #505050;
+    margin:0;
+    padding:0;
+}
+
+#main{
+    padding:25px;
+}
+#config{
+    display:none;
+    text-align:left;
+}
+.header{
+  font-size: 14px;
+  font-weight: 300;
+  margin-bottom: 20px;
+    text-align:left;
+}
+.content{
+  font-size: 17px;
+  line-height: 27px;
+  margin-bottom: 30px;
+}
+.actions{
+  
+}
+.actions a{
+  box-sizing: border-box;
+  padding: 12px 24px;
+  margin: 0 8px;
+  line-height: 20px;
+  background: #FFF;
+  display: inline-block;
+  font-family: 'Lato';
+  border: 1px solid #ccc;
+  color: #666;
+  text-decoration: none;
+  border-radius: 25px;
+}
+.actions .success{
+  border: 1px solid #239647;
+  color: #239647;
+}
+
+.modal{
+  width: 500px;
+  height: 210px;
+  display: flex;
+  flex-direction: column;
+  background: white;
+  text-align: center;
+
+
+}
+.modal .loader-bar{
+  flex-shrink: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  overflow: hidden;
+  opacity: 0.99;
+}
+.modal .loader-bar .bar{
+  width: 80px;
+  height: 4px;
+margin-left:-35px;
+  background: green;
+  animation: exordo-loader 3s ease infinite;
+  transform-origin: 50% 50%;
+}
+.modal .loader-bar .bar.offline{
+  background: red;
+}
+#top{
+
+  flex: 1 0 auto;
+}
+@keyframes exordo-loader {
+  0%  {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(480px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+#buttons {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#buttons .social-btn {
+  text-decoration: none !important;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+    padding:0;
+  margin: 10px;
+  background: #fff;
+  border-radius: 4px;
+    border:none;
+  transition: -webkit-transform 0.08s linear;
+  transition: transform 0.08s linear;
+  transition: transform 0.08s linear, -webkit-transform 0.08s linear;
+  -webkit-transform: rotate(45deg);
+          transform: rotate(45deg);
+  overflow: hidden;
+}
+#buttons .social-btn i {
+  font-size: 20px;
+  z-index: 2;
+  transition: -webkit-transform 0.08s linear;
+  transition: transform 0.08s linear;
+  transition: transform 0.08s linear, -webkit-transform 0.08s linear;
+  -webkit-transform: rotate(-45deg);
+          transform: rotate(-45deg);
+}
+#buttons .social-btn:after {
+  transition: all 0.3s;
+  content: "";
+  width: 120%;
+  height: 120%;
+  position: absolute;
+  -webkit-transform: rotate(45deg);
+          transform: rotate(45deg);
+  top: 90%;
+  left: -110%;
+}
+#buttons .social-btn:hover {
+  -webkit-transform: rotate(0);
+          transform: rotate(0);
+}
+#buttons .social-btn:hover i {
+  -webkit-transform: rotate(0);
+          transform: rotate(0);
+}
+#buttons .social-btn:hover:after {
+  -webkit-transform: rotate(0deg);
+          transform: rotate(0deg);
+  top: 0%;
+  left: 0%;
+}
+
+.social-btn.facebook {
+  color: #3b5998;
+}
+.social-btn.facebook:after {
+  background: #3b5998;
+}
+.social-btn.facebook:hover {
+  color: #fff;
+}
+
+.social-btn.instagram {
+  color: #e4405f;
+}
+.social-btn.instagram:after {
+  background: #e4405f;
+}
+.social-btn.instagram:hover {
+  color: #fff;
+}
+
+.social-btn.twitter {
+  color: #0077b5;
+}
+.social-btn.twitter:after {
+  background: #0077b5;
+}
+.social-btn.twitter:hover {
+  color: #fff;
+}
+
+.social-btn.youtube {
+  color: #E62117;
+}
+.social-btn.youtube:after {
+  background: #E62117;
+}
+
+.social-btn.youtube:hover {
+  color: #fff;
+}
+
+.social-btn.twitch {
+  color: #181717;
+}
+.social-btn.twitch:after {
+  background: #181717;
+}
+.social-btn.twitch:hover {
+  color: #fff;
+}
+.config-btn {
+  color: #181717;
+}
+.config-btn:after {
+  background: #181717;
+}
+.config-btn:hover {
+  color: #0077b5;
+}
+
+
+    </style>
+<script
+			  src="https://code.jquery.com/jquery-3.3.1.min.js"
+			  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+			  crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
+<script>
+function previewFile() {
+  var preview = document.querySelector('img');
+  var file    = document.querySelector('input[type=file]').files[0];
+  var reader  = new FileReader();
+
+  reader.addEventListener("load", function () {
+console.log(reader.result);
+  }, false);
+
+  if (file) {
+    reader.readAsDataURL(file);
+  }
+}
+
+$( document ).ready(function() {
+
+
+
+
+
+       console.log($('a[href="#config"]'));
+    $('a[href="#config"]').click(function() {
+        console.log('test');
+        $('#main').hide();
+        $('#config').show();
+        return false;
+    });
+
+
+
+
+});
+</script>
+</head>
+
+<body>
+<input type="file" onchange="previewFile()"><br>
+<div class='modal'>
+    <div id="main">
+        <div id="top">
+          <div class='header'>
+            <img src="avatar.png"/>
+            <div style="float:right"><a class="config-btn" href="#config"><i class="fa fa-cog"></i></a></div>
+          </div>
+          <div class='content'>
+            Stream jest offline
+          </div>
+          <div class='actions'>
+                <div id="buttons">
+                  <div class="social-btns">
+                    <a class="social-btn facebook" href="https://www.facebook.com/EmSc2Tv/"><i class="fa fa-facebook"></i></a>
+                    <a class="social-btn instagram" href="https://www.instagram.com/emilglhf/"><i class="fa fa-instagram"></i></a>
+                    <a class="social-btn twitter" href="https://twitter.com/emsc2tv"><i class="fa fa-twitter"></i></a>
+                    <a class="social-btn youtube" href="https://www.youtube.com/user/EmSc2Tv"><i class="fa fa-youtube"></i></a>
+                    <a class="social-btn twitch" href="https://www.twitch.tv/emstarcraft"><i class="fa fa-twitch"></i></a>
+                  </div>
+                </div>
+          </div>
+        </div>
+      <div class='loader-bar'>
+        <div class='bar offline'></div>
+      </div>
+    </div>
+    <div id="config">
+        test
+    </div>
+</div>
+  
+  
+
+</body>
+
+</html>
+
